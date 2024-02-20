@@ -79,6 +79,19 @@ def checkAllPrices(sbcset : set):
     return sbc_dict
 
 
+def getYearlyVolumeAndClose():
+    yearly_dict = dict()
+    with open("stocks.dat", 'r') as file:
+        next(file)
+        next(file)
+        for line in file:
+            values = line.split(',')
+            year = values[0].split("\\")[0]
+            if year != yearly_dict.keys():
+                yearly_dict[year] = (values[2],values[1])
+            
+    return 0
+
 
 # ######################################################
 # This block is optional and can be used for testing .
@@ -91,4 +104,4 @@ if __name__ == "__main__":
     
     print(getLowestInModel("Rasp. Pi-5*", "provider2"))
 
-    print(checkAllPrices({"Rasp. Pi-4800MQ", "Rasp. Pi-6600U", "Rasp. Pi-4950HQ", "Rasp. Pi-5700HQ"}))
+    print(checkAllPrices({"Rasp. Pi-4800MQ", "Rasp. Pi-6600U", "Rasp. Pi-4950HQ", "Rasp. Pi-5750HQ"}))
