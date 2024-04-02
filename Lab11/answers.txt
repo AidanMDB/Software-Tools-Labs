@@ -1,6 +1,6 @@
 Left_join takes all the rows of the first table and puts them on the left then 
 takes all rows in the other databse that match and puts them to the riht of the first databse
 
-Cross_join 
+Cross_join shows all the possible combinations of rows
 
 Inner Join only shows the rows with matches between the 2 tables
