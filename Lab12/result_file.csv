@@ -1,0 +1,14 @@
+instruction,distance
+Head <b>north</b> toward <b>W Stadium Ave</b>,217 ft
+Turn <b>right</b> onto <b>W Stadium Ave</b>,387 ft
+Turn <b>left</b> toward <b>John R Wooden Dr</b>/<wbr/><b>N University St</b>,85 ft
+Turn <b>right</b> toward <b>John R Wooden Dr</b>/<wbr/><b>N University St</b>,0.1 mi
+Turn <b>left</b> onto <b>John R Wooden Dr</b>/<wbr/><b>N University St</b>,410 ft
+Turn <b>right</b> toward <b>Northwestern Ave</b>,440 ft
+Turn <b>left</b> onto <b>Northwestern Ave</b>,282 ft
+"Turn <b>left</b><div style=""font-size:0.9em"">Destination will be on the left</div>",85 ft
+
+name,rating
+Garbanzo Mediterranean Fresh,4.6
+Hala's Grill,4.6
+Flaming Kuma,4.5

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<script>
+    function getTimeDif() {
+        d = new Date();
+        local_time = d.getTime()/1000;
+        document.getElementById("time") = local_time;
+        // document.getElementById("form1").submit();
+    }
+</script>
+<html>
+    <h1>Destination Input</h1>
+    <form method="POST" id="form1" method="POST" action="home" name="subForm">
+        <label for="origin">Origin</label><br>
+        <input type="text" id="origin" name="input_origin"><br>
+        <label for="destination">Destination</label><br>
+        <input type="text" id="destination" name="input_destination"><br>
+        <input type="hidden" id="time" name="locTime">
+        <input type="submit" onclick="getTimeDif()" value="Find directions and nearby food options">
+    </form>
+</html>
