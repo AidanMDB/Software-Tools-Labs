@@ -51,7 +51,22 @@
             <td>Name</td>
             <td>Rating</td>
         </tr> 
-        {% for place in nearby_locs %}
+        <tr>
+            <td>{{nearby_locs[0]['name']}}</td>
+            <td>{{nearby_locs[0]['rating']}}</td>
+            <td><img src="static/photo0.jpeg"></td>
+        </tr>
+        <tr>
+            <td>{{nearby_locs[1]['name']}}</td>
+            <td>{{nearby_locs[1]['rating']}}</td>
+            <td><img src="static/photo1.jpeg"></td>
+        </tr>
+        <tr>
+            <td>{{nearby_locs[2]['name']}}</td>
+            <td>{{nearby_locs[2]['rating']}}</td>
+            <td><img src="static/photo2.jpeg"></td>
+        </tr>
+        {% for place in nearby_locs[3:] %}
         <tr>    
             <td>{{place['name']}}</td>
             <td>{{place['rating']}}</td>

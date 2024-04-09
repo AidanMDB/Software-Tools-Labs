@@ -11,6 +11,7 @@ import time
 import googlemaps
 from pprint import pprint as pp
 import csv
+import datetime
 # import sqlite3
 # import hashlib
 
@@ -31,13 +32,19 @@ app = flask.Flask(__name__)
 
 def find_10_results(nearby):
     #pp(nearby)
+    photo_num = -1
     places_10 = []
-    for result in nearby['results']:
+    for i, result in enumerate(nearby['results']):
         if result['rating'] >= 4 and result['user_ratings_total'] < 300:
             places_10.append({'name': result['name'], 'rating': result['rating']})
+
+            if len(places_10) <= 3:
+                photo = gmaps.places_photo(result['photos'][0]['photo_reference'], 400, 400)
+                photo_num += 1
+                with open(f'static/photo{photo_num}.jpeg', 'wb') as f:
+                    for row in photo:
+                        f.write(row)
         
-        if len(places_10) <= 3:
-            result['photos'][0]['photo_reference']
 
         if len(places_10) == 10:
             break
@@ -92,29 +99,32 @@ def submit_locs():
     origin = flask.request.form['input_origin']
     destination = flask.request.form['input_destination']
     date = flask.request.form['locTime']
-    #print('DATE=')
-    #print(date)
+    local_time = datetime.datetime.fromtimestamp(float(date))
+    
     now=time.time()
 
     try:
         direction_results = gmaps.directions(origin, destination, mode='walking', departure_time=now)
     except Exception:
         return flask.redirect('/home')
-    #pp(direction_results)
+
     latitude = direction_results[0]['legs'][0]['end_location']['lat']
     longitude = direction_results[0]['legs'][0]['end_location']['lng']
-    seconds = getETA(direction_results)
-    #print("lat=%f", latitude)
-    #print("lng=%f", longitude)
+    seconds_eta = getETA(direction_results)
 
     nearby_places = gmaps.places(location = f"{latitude}, {longitude}", radius=100, open_now=False, type='restaurant')
+    #gmaps.places_photos()
     top_10 = find_10_results(nearby_places)
     dir = find_instr_dir(direction_results)
     create_csv(direction_results, top_10)
 
-    pp(nearby_places)
 
-    return flask.render_template('results.html', nearby_locs=top_10, instr_dist=dir, eta=seconds)
+    local_tim_end = datetime.timedelta(seconds=seconds_eta)
+    local_tim_end = local_tim_end + local_time
+    date_time = local_tim_end.strftime("%m/%d/%Y, %H:%M:%S")
+    #pp(nearby_places)
+
+    return flask.render_template('results.html', nearby_locs=top_10, instr_dist=dir, eta=date_time)
 
 
 @app.route('/results', methods=['POST'])
