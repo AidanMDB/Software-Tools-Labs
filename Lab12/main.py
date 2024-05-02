@@ -24,7 +24,7 @@ import datetime
 
 # pp(dir(gmaps))     will print out every function/thing we can use with googlemaps
 
-API_KEY = "" # should be filled with a string of random letters and numbers from the google API
+API_KEY = "AIzaSyArEIQd1VVj3q9y7LiodlSwvEwJdr4QJHI"
 
 gmaps = googlemaps.Client(key=API_KEY)
 app = flask.Flask(__name__)
